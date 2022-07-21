@@ -25,6 +25,10 @@ class TagEditText @JvmOverloads constructor(
 
     private var regex = Regex("#([ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]{1,15})")
     private val binding = EdittextTagBinding.inflate(LayoutInflater.from(context), this, true)
+
+    val text = binding.editText
+    var highlightColor = Color.RED
+
     var contents = ""
         get() {
             field = binding.editText.text.toString()
@@ -66,7 +70,7 @@ class TagEditText @JvmOverloads constructor(
 
             match.forEach { tag ->
                 val foregroundSpan =
-                    ForegroundColorSpan(Color.RED)
+                    ForegroundColorSpan(highlightColor)
                 binding.editText.text?.setSpan(
                     foregroundSpan,
                     text.toString().indexOf(tag.value, lastIndex),
